@@ -1,0 +1,33 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/admin_layout :: adminLayout">
+
+</body>
+<div th:fragment="content">
+    <h2>Danh sách truyện</h2>
+    <a class="btn btn-success mb-3" th:href="@{/admin/stories/add}">Thêm truyện</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Ảnh bìa</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="story : ${stories}">
+            <td th:text="${story.title}">Tên truyện</td>
+            <td><img th:src="@{${story.coverImage}}" width="100"/></td>
+            <td th:text="${story.status}">Trạng thái</td>
+            <td>
+                <a th:href="@{'/admin/stories/edit/' + ${story.id}}" class="btn btn-sm btn-primary">Sửa</a>
+                <a th:href="@{'/admin/stories/delete/' + ${story.id}}" class="btn btn-sm btn-danger">Xoá</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
