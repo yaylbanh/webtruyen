@@ -12,12 +12,8 @@
     <label>Tác giả:</label> <input type="text" th:field="*{author}" placeholder="Tác giả"/><br/>
     <label>Số Chương</label>  <input type="number" th:field="*{chapterNumber}" style="width:700px"/><br/>
     <label>Thể loại:</label><br/>
-    <div th:each="genre : ${genres}">
-    <input type="checkbox"
-           name="genreIds"
-           th:value="${genre.id}"
-           th:checked="${story.genres != null and story.genres.contains(genre)}" />
-    <span th:text="${genre.name}"></span><br>
+    <div>
+	 <input type="checkbox" th:field="*{genres}" th:value="${genre.id}" />
 	</div>
     <label>Mô tả:</label> <textarea style="width:100%;height:500px"th:field="*{description}" th:utext="*{description}"></textarea><br/>
     <label>Trạng thái truyện:</label>
