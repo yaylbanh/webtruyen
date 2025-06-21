@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin_layout}">
+
+
+<div layout:fragment="content">
+    <h2>Danh sách chương - [[${story.title}]]</h2>
+    <a th:href="@{/admin/chapters/story/{id}/add(id=${story.id})}">Thêm chương mới</a>
+    <table border="1">
+        <tr>
+            <th>Số chương</th>
+            <th>Tiêu đề</th>
+            <th>Ngày tạo</th>
+            <th>kích hoạt</th>
+            <th>Hành động</th>
+        </tr>
+        <tr th:each="c : ${chapters}">
+            <td th:text="${c.chapterNumber}"></td>
+            <td th:text="${c.title}"></td>
+            <td th:text="${c.active}"></td>
+            <td th:text="${#dates.format(c.createdAt, 'dd/MM/yyyy')}"></td>
+            <td>
+                <a th:href="@{/admin/chapters/edit/{id}(id=${c.id})}">Sửa</a> |
+                <a th:href="@{/admin/chapters/delete/{id}(id=${c.id})}">Xoá</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

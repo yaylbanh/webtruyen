@@ -3,6 +3,8 @@
 
 CREATE DATABASE IF NOT EXISTS webtruyen CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE webtruyen;
+select * from  webtruyen.stories
+
 
 -- Người dùng (tuỳ chọn nếu có login)
 CREATE TABLE users (
@@ -21,9 +23,10 @@ CREATE TABLE stories (
     slug VARCHAR(255) NOT NULL UNIQUE,
     cover_image VARCHAR(500),
     author  VARCHAR(255) NOT NULL,
-    numchap int,
+    chapter_number int,
     description MEDIUMTEXT,
     status ENUM('Full', 'Ongoing', 'Paused', 'Dropped') DEFAULT 'Ongoing',
+    active BOOLEAN  NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -35,11 +38,15 @@ CREATE TABLE chapters (
     title VARCHAR(255),
     content LONGTEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	active BOOLEAN  NOT NULL DEFAULT TRUE,
     FOREIGN KEY (story_id) REFERENCES stories(id) ON DELETE CASCADE
 );
 
 -- Thể loại
 ALTER TABLE WEBTRUYEN.genres ADD COLUMN active BOOLEAN NOT NULL DEFAULT TRUE;
+ALTER TABLE WEBTRUYEN.chapters ADD COLUMN active BOOLEAN NOT NULL DEFAULT TRUE;
+ALTER TABLE WEBTRUYEN.stories ADD COLUMN chapter_number INT ;
+ALTER TABLE WEBTRUYEN.stories ADD COLUMN author VARCHAR(255) ;
 
 CREATE TABLE genres (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

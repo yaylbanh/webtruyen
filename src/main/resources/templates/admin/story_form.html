@@ -1,16 +1,34 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Form test</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin_layout}">
+
+<div layout:fragment="content">
 <h1>Form Thêm Truyện</h1>
+
 <form method="post" th:action="@{/admin/stories/save}" th:object="${story}" enctype="multipart/form-data">
 	<img th:src="*{coverImage}" style="width: 200px;">    
     <input type="file" name="imageFile"/><br/><br/>
-    <label>Title:</label> <input type="text" th:field="*{title}" placeholder="Tiêu đề"/><br/>
+    <label>Tên truyện:</label> <input type="text" th:field="*{title}" placeholder="Tiêu đề"/><br/>
+    <label>Tác giả:</label> <input type="text" th:field="*{author}" placeholder="Tác giả"/><br/>
+    <label>Số Chương</label>  <input type="number" th:field="*{chapterNumber}" style="width:700px"/><br/>
+    <label>Thể loại:</label><br/>
+    <div th:each="genre : ${genres}">
+    <input type="checkbox"
+           name="genreIds"
+           th:value="${genre.id}"
+           th:checked="${story.genres != null and story.genres.contains(genre)}" />
+    <span th:text="${genre.name}"></span><br>
+	</div>
     <label>Mô tả:</label> <textarea style="width:100%;height:500px"th:field="*{description}" th:utext="*{description}"></textarea><br/>
-    <label>Trạng thái:</label> <input type="text" th:field="*{status}"/><br/>
+    <label>Trạng thái truyện:</label>
+	 <select th:field="*{status}">
+        <option value="Ongoing">Đang ra</option>
+        <option value="Full">Hoàn thành</option>
+        <option value="Paused">Tạm ngưng</option>
+        <option value="Dropped">Đã bỏ</option>
+    </select>
+    <br/>
+    <label>Kích hoạt:</label> <input type="checkbox" th:field="*{active}"/><br/>
     <input type="hidden" th:field="*{id}"/>
     <button type="submit">Lưu</button>
 </form>

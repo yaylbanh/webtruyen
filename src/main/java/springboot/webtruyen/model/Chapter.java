@@ -1,30 +1,84 @@
 package springboot.webtruyen.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "chapters")
 public class Chapter {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+	 	private boolean active;
+	    private int chapterNumber;
+	    private String title;
+	    
+		@Lob
+	    private String content;
 
-    private String title;
+	    @Column(name = "created_at", updatable = false)
+	    private Timestamp createdAt;
 
-    @Column(columnDefinition = "TEXT")
-    private String content;
+	    @ManyToOne
+	    @JoinColumn(name = "story_id", nullable = false)
+	    private Story story;
 
-    @Column(name = "chapter_number")
-    private int chapterNumber;
+		public Long getId() {
+			return id;
+		}
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-    @ManyToOne
-    @JoinColumn(name = "story_id")
-    private Story story;
+		public int getChapterNumber() {
+			return chapterNumber;
+		}
 
-    // Getters và Setters
+		public void setChapterNumber(int chapterNumber) {
+			this.chapterNumber = chapterNumber;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public Timestamp getCreatedAt() {
+			return createdAt;
+		}
+
+		public void setCreatedAt(Timestamp createdAt) {
+			this.createdAt = createdAt;
+		}
+
+		public Story getStory() {
+			return story;
+		}
+
+		public void setStory(Story story) {
+			this.story = story;
+		}
+		public boolean isActive() {
+			return active;
+		}
+
+		public void setActive(boolean active) {
+			this.active = active;
+		}
+
+
 }

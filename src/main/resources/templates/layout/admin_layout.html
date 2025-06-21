@@ -21,7 +21,7 @@
                     <a class="nav-link" th:href="@{/admin/chapters}">📄 Quản lý chương</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/categories}">🏷️ Quản lý thể loại</a>
+                    <a class="nav-link" th:href="@{/admin/genres}">🏷️ Quản lý thể loại</a>
                 </li>
             </ul>
         </div>
@@ -30,7 +30,7 @@
 
 <!-- NỘI DUNG -->
 <div class="container mt-4" th:fragment="adminLayout">
-    <div th:replace="~{::content}"></div>
+    <div layout:fragment="content"></div>
 </div>
 
 </body>

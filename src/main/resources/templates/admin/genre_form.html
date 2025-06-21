@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin_layout}">
+
+<div layout:fragment="content">
+    <h1>Form THỂ LOẠI</h1>
+    <form method="post" th:action="@{/admin/genres/save}" th:object="${item}">
+        <label>Tên thể loại:</label>
+        <input type="text" th:field="*{name}" placeholder="Tên thể loại"/><br/>
+
+        <label>Kích hoạt:</label>
+        <input type="checkbox" th:field="*{active}"/><br/>
+
+        <input type="hidden" th:field="*{id}"/>
+        <button type="submit">Lưu</button>
+    </form>
+</div>
+</body>
+</html>
