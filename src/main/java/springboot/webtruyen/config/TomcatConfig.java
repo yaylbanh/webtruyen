@@ -1,6 +1,5 @@
 package springboot.webtruyen.config;
 
-import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
@@ -35,4 +34,5 @@ public class TomcatConfig {
         factory.setMaxRequestSize(DataSize.ofMegabytes(200));
         return factory.createMultipartConfig();
     }
+   
 }

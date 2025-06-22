@@ -111,7 +111,7 @@ public class AdminStoryController {
             List<Genre> genres = genreRepository.findAllById(genreIds);
             story.setGenres(genres);
         } else {
-            story.setGenres(null);
+            //story.setGenres(null);
         }
 
         storyRepository.save(story);
